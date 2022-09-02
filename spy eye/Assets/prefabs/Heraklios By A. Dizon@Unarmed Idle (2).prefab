@@ -2018,6 +2018,7 @@ GameObject:
   - component: {fileID: 9167192048909950281}
   - component: {fileID: 3015235051155474227}
   - component: {fileID: -371669062072715123}
+  - component: {fileID: 9147824710316137021}
   m_Layer: 0
   m_Name: Heraklios By A. Dizon@Unarmed Idle (2)
   m_TagString: voin
@@ -2082,6 +2083,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &9147824710316137021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8391253071272888307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfdd834331fb34740bfa9bff173f33fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targ: {x: 0, y: 0, z: 0}
+  _koster: {fileID: 2676640985326916601, guid: 54698368a598c174f867411b44e2d7a2, type: 3}
+  Speed: 2
 --- !u!1 &8564930726583423959
 GameObject:
   m_ObjectHideFlags: 0

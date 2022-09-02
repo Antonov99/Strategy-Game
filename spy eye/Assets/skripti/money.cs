@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// класс описывает все взаимодействия с внутриигровой валютой
+// включая постройку зданий и найм юнитов
+
 public class money : MonoBehaviour
 {
     AudioSource audio;
