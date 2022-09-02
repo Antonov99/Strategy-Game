@@ -8,6 +8,8 @@ public class money : MonoBehaviour
     AudioSource audio;
     public AudioClip bolshe;
     public AudioClip zdanie;
+    public AudioClip nehvataet;
+
     public GameObject casern;
     public GameObject mine;
     public GameObject plavilnya;
@@ -19,22 +21,27 @@ public class money : MonoBehaviour
     public GameObject tent5;
     public GameObject kuznya;
     public Button warriorsButton;
+
     public int Mcost;
     public int Ccost;
     public int Pcost;
     public int Acost;
+
     public int Zhiteli;
     public int warriorsNow;
+
     public Text Tmoney;
     public Text Tcasern;
     public Text Tpeople;
     public Text Tarmor;
-
     public Text Tgold;
     public Text Tzhiteli;
 
-    [SerializeField]
-    private float cash;
+    public GameObject V1;
+    public Vector3 Offset;
+
+
+    public float cash;
     public float prirost;
     public float time;
     private float timeStart;
@@ -87,6 +94,7 @@ public class money : MonoBehaviour
                 Tmoney.text = "Sold";
                 prirost += 1;
                 audio.PlayOneShot(zdanie);
+                Mcost = -1;
             }
         }
         else
@@ -107,6 +115,7 @@ public class money : MonoBehaviour
                 Tcasern.text = "Sold";
                 warriorsButton.interactable=true;
                 audio.PlayOneShot(zdanie);
+                Ccost = -1;
             }
         }
         else
@@ -171,6 +180,7 @@ public class money : MonoBehaviour
                 Tpeople.text = "Sold";
                 audio.PlayOneShot(zdanie);
                 Zhiteli += 4;
+                Pcost = -1;
             }
         }
         else
@@ -190,12 +200,36 @@ public class money : MonoBehaviour
                 cash -= Acost;
                 Tarmor.text = "Sold";
                 audio.PlayOneShot(zdanie);
+                Acost = -1;
             }
         }
         else
         {
             audio.Stop();
             audio.PlayOneShot(bolshe);
+        }
+    }
+
+    public void spawn()
+    {
+        if (Zhiteli > 0 && warriorsNow < Zhiteli)
+        {
+            if (cash >= 2)
+            {
+                Instantiate(V1, Offset, transform.rotation);
+                cash -= 2;
+                warriorsNow++;
+            }
+            else
+            {
+                audio.Stop();
+                audio.PlayOneShot(bolshe);
+            }
+        }
+        else 
+        {
+            audio.Stop();
+            audio.PlayOneShot(nehvataet);
         }
     }
 }
