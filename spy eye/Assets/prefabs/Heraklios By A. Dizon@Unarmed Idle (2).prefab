@@ -2071,7 +2071,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2095,9 +2095,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfdd834331fb34740bfa9bff173f33fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 1783985690783296571, guid: 3c97ef77b77c1a34f91e3fa01b434ec9, type: 3}
   _targ: {x: 0, y: 0, z: 0}
-  _koster: {fileID: 2676640985326916601, guid: 54698368a598c174f867411b44e2d7a2, type: 3}
+  trans: {fileID: 0}
+  _koster: {fileID: 2676640985327257899, guid: 54698368a598c174f867411b44e2d7a2, type: 3}
   Speed: 2
+  radiusVid: 10
+  radiusAtaki: 2
+  distance: 0
 --- !u!1 &8564930726583423959
 GameObject:
   m_ObjectHideFlags: 0
