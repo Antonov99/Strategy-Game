@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    AudioSource audio;
+    AudioSource aud;
     public AudioClip knopka;
     public GameObject menu;
     public GameObject build;
@@ -17,14 +17,14 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        aud = GetComponent<AudioSource>();
         sound = true;
-        
+
     }
 
     public void pause()
     {
-        audio.PlayOneShot(knopka);
+        aud.PlayOneShot(knopka);
         menu.SetActive(true);
         build.SetActive(false);
         shop.SetActive(false);
@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void resume()
     {
-        audio.PlayOneShot(knopka);
+        aud.PlayOneShot(knopka);
         menu.SetActive(false);
         build.SetActive(true);
         Time.timeScale = 1f;
@@ -43,13 +43,13 @@ public class PauseMenu : MonoBehaviour
     {
         if (!sound)
         {
-            
+
             AudioListener.volume = 1f;
             sound = true;
         }
         else
         {
-           
+
             AudioListener.volume = 0f;
             sound = false;
         }
@@ -62,7 +62,7 @@ public class PauseMenu : MonoBehaviour
 
     public void exit()
     {
-        audio.PlayOneShot(knopka);
+        aud.PlayOneShot(knopka);
         Time.timeScale = 1f;
         AudioListener.volume = 1f;
         SceneManager.LoadScene("1");
@@ -75,7 +75,7 @@ public class PauseMenu : MonoBehaviour
 
     public void sh()
     {
-        audio.PlayOneShot(knopka);
+        aud.PlayOneShot(knopka);
         shop.SetActive(true);
         build.SetActive(false);
         warriorsButton.SetActive(false);
@@ -83,7 +83,7 @@ public class PauseMenu : MonoBehaviour
 
     public void shKrest()
     {
-        audio.PlayOneShot(knopka);
+        aud.PlayOneShot(knopka);
         shop.SetActive(false);
         build.SetActive(true);
         warriorsButton.SetActive(true);
@@ -91,7 +91,7 @@ public class PauseMenu : MonoBehaviour
 
     public void voini()
     {
-        audio.PlayOneShot(knopka);
+        aud.PlayOneShot(knopka);
         shop.SetActive(false);
         build.SetActive(false);
         warriorsButton.SetActive(false);
@@ -100,7 +100,7 @@ public class PauseMenu : MonoBehaviour
 
     public void voiniZakr()
     {
-        audio.PlayOneShot(knopka);
+        aud.PlayOneShot(knopka);
         build.SetActive(true);
         warriorsButton.SetActive(true);
         warriorsPanel.SetActive(false);

@@ -5,49 +5,66 @@ using UnityEngine.AI;
 
 public class WarController : MonoBehaviour
 {
-    public Transform enemy;
+    public GameObject enemy;
     private NavMeshAgent v1_agent;
-    public Vector3 _targ;
-    public Transform trans;
-    public Transform _koster;
-    public float Speed = 0.0f;
-    public float radiusVid=10;
-    public float radiusAtaki=2;
-    public float distance; 
+    private Vector3 _targ;
+    private Transform trans;
+    public Transform _Target;
+    public float radiusVid = 10;
+    public float radiusAtaki = 0.5f;
+    private float distanceToEnemy;
+    private float distanceToKoster;
     Animator v1_animator;
 
     public void Awake()
     {
-        trans=this.transform;
-        _targ = _koster.position;
+        enemy = GameObject.FindGameObjectWithTag("enemy");
+        trans = this.transform;
+        _targ = new Vector3(_Target.position.x+Random.Range(-5,5), _Target.position.y, _Target.position.z+Random.Range(-2,2));
         v1_agent = GetComponent<NavMeshAgent>();
-        v1_agent.speed = Speed;
         v1_animator = GetComponent<Animator>();
     }
 
     private void Start()
-    {       
-        
+    {
+
     }
 
     private void Update()
     {
-        distance = Vector3.Distance(trans.position, enemy.transform.position);
-        Debug.Log(distance);
-        if (distance < radiusVid && distance>radiusAtaki)
+        distanceToEnemy = Vector3.Distance(trans.position, enemy.transform.position);
+        if (distanceToEnemy < radiusVid && distanceToEnemy > radiusAtaki)
         {
-            v1_animator.SetBool("vizhuvraga", true);
+            v1_agent.speed = 3;
+            v1_animator.SetBool("walk", false);
+            v1_animator.SetBool("attack", false);
+            v1_animator.SetBool("run", true);
             v1_agent.SetDestination(enemy.transform.position);
         }
-        else if (distance < radiusAtaki)
+        else if (distanceToEnemy < radiusAtaki)
         {
-            v1_animator.SetBool("vizhuvraga", false);
-            v1_animator.SetBool("byuvraga", true);
-            v1_agent.enabled = false;
+            v1_animator.SetBool("run", false);
+            v1_animator.SetBool("walk", false);
+            v1_animator.SetBool("attack", true);
         }
         else
         {
-            v1_agent.SetDestination(_targ);
+            distanceToKoster = Vector3.Distance(trans.position, _targ);
+            if (distanceToKoster > v1_agent.stoppingDistance)
+            {
+                v1_agent.speed = 1;
+                v1_animator.SetBool("run", false);
+                v1_animator.SetBool("attack", false);
+                v1_animator.SetBool("walk", true);
+                v1_agent.SetDestination(_targ);
+            }
+            else
+            {
+                v1_animator.SetBool("run", false);
+                v1_animator.SetBool("attack", false);
+                v1_animator.SetBool("walk", false);
+                trans.rotation = Quaternion.Euler(0,0,0);
+            }
         }
     }
 

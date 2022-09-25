@@ -4,24 +4,24 @@ public class CameraController : MonoBehaviour
 {
 
     private Vector3 startPosition;
-    public Camera cam;
+    private Camera cam;
     public bool prib;
 
     private void Start()
     {
-        prib= false;
-        cam = GetComponent<Camera>();
+        prib = false;
+        cam = Camera.main;
     }
 
     private void Update()
     {
-        
+
         if (Input.GetMouseButtonDown(0))
         {
             startPosition = cam.ScreenToViewportPoint(Input.mousePosition);
         }
 
-        
+
         if (Input.GetMouseButton(0))
         {
             float pos = cam.ScreenToViewportPoint(Input.mousePosition).x - startPosition.x;
@@ -35,13 +35,13 @@ public class CameraController : MonoBehaviour
         if (!prib)
         {
 
-            transform.position = new Vector3(transform.position.x -8, transform.position.y - 8, transform.position.z -8);
+            transform.position = new Vector3(transform.position.x - 8, transform.position.y - 8, transform.position.z - 8);
             prib = true;
         }
         else
         {
 
-            transform.position = new Vector3(transform.position.x+8, transform.position.y + 8, transform.position.z+8);
+            transform.position = new Vector3(transform.position.x + 8, transform.position.y + 8, transform.position.z + 8);
             prib = false;
         }
     }

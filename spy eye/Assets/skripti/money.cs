@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class money : MonoBehaviour
 {
-    AudioSource audio;
+    AudioSource aud;
     public AudioClip bolshe;
     public AudioClip zdanie;
     public AudioClip nehvataet;
@@ -51,7 +51,7 @@ public class money : MonoBehaviour
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        aud = GetComponent<AudioSource>();
         Tmoney.text = Mcost + "$";
         Tcasern.text = Ccost + "$";
         Tpeople.text = Pcost + "$";
@@ -65,15 +65,16 @@ public class money : MonoBehaviour
 
     void Update()
     {
-        PlayerPrefs.SetFloat("cash", cash);
-        time -= Time.deltaTime;
-        Tgold.text = "Золото: "+cash+"$";
+        Tgold.text = "Золото: " + cash + "$";
         Tzhiteli.text = "Воины: " + warriorsNow + "/" + Zhiteli;
+
+        time -= Time.deltaTime;
 
         if (time <= 0)
         {
             cash += prirost;
             time = timeStart;
+            PlayerPrefs.SetFloat("cash", cash);
         }
     }
 
@@ -88,7 +89,7 @@ public class money : MonoBehaviour
                 Mcost += 10;
                 Tmoney.text = Mcost + "$";
                 prirost += 1;
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
             }
             else if (!plavilnya.activeSelf)
             {
@@ -96,14 +97,14 @@ public class money : MonoBehaviour
                 cash -= Mcost;
                 Tmoney.text = "Sold";
                 prirost += 1;
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Mcost = -1;
             }
         }
         else
         {
-            audio.Stop();
-            audio.PlayOneShot(bolshe);
+            aud.Stop();
+            aud.PlayOneShot(bolshe);
         }
     }
 
@@ -116,15 +117,15 @@ public class money : MonoBehaviour
                 casern.SetActive(true);
                 cash -= Ccost;
                 Tcasern.text = "Sold";
-                warriorsButton.interactable=true;
-                audio.PlayOneShot(zdanie);
+                warriorsButton.interactable = true;
+                aud.PlayOneShot(zdanie);
                 Ccost = -1;
             }
         }
         else
         {
-            audio.Stop();
-            audio.PlayOneShot(bolshe);
+            aud.Stop();
+            aud.PlayOneShot(bolshe);
         }
     }
     public void people()
@@ -137,7 +138,7 @@ public class money : MonoBehaviour
                 cash -= Pcost;
                 Pcost += 5;
                 Tpeople.text = Pcost + "$";
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Zhiteli += 2;
             }
             else if (!tent1.activeSelf)
@@ -146,7 +147,7 @@ public class money : MonoBehaviour
                 cash -= Pcost;
                 Pcost += 5;
                 Tpeople.text = Pcost + "$";
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Zhiteli += 2;
             }
             else if (!tent2.activeSelf)
@@ -155,7 +156,7 @@ public class money : MonoBehaviour
                 cash -= Pcost;
                 Pcost += 10;
                 Tpeople.text = Pcost + "$";
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Zhiteli += 2;
             }
             else if (!tent3.activeSelf)
@@ -164,7 +165,7 @@ public class money : MonoBehaviour
                 cash -= Pcost;
                 Pcost += 10;
                 Tpeople.text = Pcost + "$";
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Zhiteli += 4;
             }
             else if (!tent4.activeSelf)
@@ -173,7 +174,7 @@ public class money : MonoBehaviour
                 cash -= Pcost;
                 Pcost += 10;
                 Tpeople.text = Pcost + "$";
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Zhiteli += 4;
             }
             else if (!tent5.activeSelf)
@@ -181,15 +182,15 @@ public class money : MonoBehaviour
                 tent5.SetActive(true);
                 cash -= Pcost;
                 Tpeople.text = "Sold";
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Zhiteli += 4;
                 Pcost = -1;
             }
         }
         else
         {
-            audio.Stop();
-            audio.PlayOneShot(bolshe);
+            aud.Stop();
+            aud.PlayOneShot(bolshe);
         }
     }
 
@@ -202,37 +203,37 @@ public class money : MonoBehaviour
                 kuznya.SetActive(true);
                 cash -= Acost;
                 Tarmor.text = "Sold";
-                audio.PlayOneShot(zdanie);
+                aud.PlayOneShot(zdanie);
                 Acost = -1;
             }
         }
         else
         {
-            audio.Stop();
-            audio.PlayOneShot(bolshe);
+            aud.Stop();
+            aud.PlayOneShot(bolshe);
         }
     }
 
-    public void spawn()
+    public void spawn1()
     {
         if (Zhiteli > 0 && warriorsNow < Zhiteli)
         {
-            if (cash >= 2)
+            if (cash >= 5)
             {
                 Instantiate(V1, Offset, transform.rotation);
-                cash -= 2;
+                cash -= 5;
                 warriorsNow++;
             }
             else
             {
-                audio.Stop();
-                audio.PlayOneShot(bolshe);
+                aud.Stop();
+                aud.PlayOneShot(bolshe);
             }
         }
-        else 
+        else
         {
-            audio.Stop();
-            audio.PlayOneShot(nehvataet);
+            aud.Stop();
+            aud.PlayOneShot(nehvataet);
         }
     }
 }
