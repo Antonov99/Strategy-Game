@@ -40,7 +40,7 @@ public class money : MonoBehaviour
     public Text Tgold;
     public Text Tzhiteli;
 
-    public GameObject V1;
+    public WarController V1;
     public Vector3 Offset;
 
 
@@ -48,6 +48,8 @@ public class money : MonoBehaviour
     public float prirost;
     public float time;
     private float timeStart;
+
+    public Button bAttack;
 
     void Start()
     {
@@ -220,7 +222,8 @@ public class money : MonoBehaviour
         {
             if (cash >= 5)
             {
-                Instantiate(V1, Offset, transform.rotation);
+                var Warrior=Instantiate(V1, Offset, transform.rotation);
+                bAttack.onClick.AddListener(Warrior.Attack);
                 cash -= 5;
                 warriorsNow++;
             }

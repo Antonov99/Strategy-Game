@@ -9,34 +9,37 @@ public class WarController : MonoBehaviour
     public GameObject enemy;
     private NavMeshAgent v1_agent;
     private Vector3 _targ;
+    public GameObject targetAttack;
     private Transform trans;
     public Transform _Target;
-    public Transform targetAttack;
     public float radiusVid = 10;
     public float radiusAtaki = 0.5f;
     private float distanceToEnemy;
-    private float distanceToKoster;
+    private float distanceToFire;
     Animator v1_animator;
-
-    public bool Attack;
+    public bool attack;
+    
 
     public void Awake()
     {
         enemy = GameObject.FindGameObjectWithTag("enemy");
+        targetAttack = GameObject.FindGameObjectWithTag("target");
         trans = this.transform;
         _targ = new Vector3(_Target.position.x + Random.Range(-5, 5), _Target.position.y, _Target.position.z + Random.Range(-2, 2));
         v1_agent = GetComponent<NavMeshAgent>();
         v1_animator = GetComponent<Animator>();
     }
 
-    private void Start()
+    public void Start()
     {
-
+        attack = false;
     }
 
-    private void Update()
+    public void Update()
     {
+        Debug.Log(attack);
         distanceToEnemy = Vector3.Distance(trans.position, enemy.transform.position);
+
         if (distanceToEnemy < radiusVid && distanceToEnemy > radiusAtaki)
         {
             v1_agent.speed = 3;
@@ -51,19 +54,18 @@ public class WarController : MonoBehaviour
             v1_animator.SetBool("walk", false);
             v1_animator.SetBool("attack", true);
         }
-        else if (Attack==true)
+        else if (attack)
         {
                 v1_agent.speed = 3;
                 v1_animator.SetBool("walk", false);
                 v1_animator.SetBool("attack", false);
                 v1_animator.SetBool("run", true);
                 v1_agent.SetDestination(targetAttack.transform.position);
-
         }
         else 
         {
-                distanceToKoster = Vector3.Distance(trans.position, _targ);
-                if (distanceToKoster > v1_agent.stoppingDistance)
+                distanceToFire = Vector3.Distance(trans.position, _targ);
+                if (distanceToFire > v1_agent.stoppingDistance)
                 {
                     v1_agent.speed = 1;
                     v1_animator.SetBool("run", false);
@@ -81,18 +83,9 @@ public class WarController : MonoBehaviour
         }
         
     }
-
-    public void attack()
-    {
-        if (Attack)
-        {
-            Attack = false;
-            Debug.Log(Attack);
-        }
-        else
-        {
-            Attack = true;
-            Debug.Log(Attack);
-        }
+    public void Attack()
+    { 
+        attack = !attack;
+        Debug.Log(attack);
     }
 }
