@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class WarController : MonoBehaviour
 {
-    public GameObject enemy;
+    GameObject[] enemies;
+    GameObject nearestEnemy;
+
     private NavMeshAgent v1_agent;
     private Vector3 _targ;
     public GameObject targetAttack;
@@ -22,7 +21,7 @@ public class WarController : MonoBehaviour
 
     public void Awake()
     {
-        enemy = GameObject.FindGameObjectWithTag("enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         targetAttack = GameObject.FindGameObjectWithTag("target");
         trans = this.transform;
         _targ = new Vector3(_Target.position.x + Random.Range(-5, 5), _Target.position.y, _Target.position.z + Random.Range(-2, 2));
@@ -35,18 +34,24 @@ public class WarController : MonoBehaviour
         attack = false;
     }
 
+    public GameObject ClosestEnemy()
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        nearestEnemy = enemies[0];
+        return nearestEnemy;
+    }
+
     public void Update()
     {
-        Debug.Log(attack);
-        distanceToEnemy = Vector3.Distance(trans.position, enemy.transform.position);
-
+        nearestEnemy=ClosestEnemy();
+        distanceToEnemy = Vector3.Distance(trans.position, nearestEnemy.transform.position);
         if (distanceToEnemy < radiusVid && distanceToEnemy > radiusAtaki)
         {
             v1_agent.speed = 3;
             v1_animator.SetBool("walk", false);
             v1_animator.SetBool("attack", false);
             v1_animator.SetBool("run", true);
-            v1_agent.SetDestination(enemy.transform.position);
+            v1_agent.SetDestination(nearestEnemy.transform.position);
         }
         else if (distanceToEnemy < radiusAtaki)
         {
@@ -86,6 +91,5 @@ public class WarController : MonoBehaviour
     public void Attack()
     { 
         attack = !attack;
-        Debug.Log(attack);
     }
 }

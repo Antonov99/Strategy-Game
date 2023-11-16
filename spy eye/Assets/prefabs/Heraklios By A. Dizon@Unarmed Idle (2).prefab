@@ -2095,13 +2095,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfdd834331fb34740bfa9bff173f33fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1789546777825566087, guid: 3c97ef77b77c1a34f91e3fa01b434ec9, type: 3}
-  targetAttack: {x: -5.9, y: 18.3, z: 203.5}
+  targetAttack: {fileID: 588114513281634223, guid: 09f1939a7c44c1a498bf14873639ef21,
+    type: 3}
   _Target: {fileID: 7779296707339847948, guid: bec9a5f3ac49bc245886d559be469540, type: 3}
   radiusVid: 10
   radiusAtaki: 2
   attack: 0
-  bAttack: {fileID: 8855454017661105393, guid: 9c2b4080957905445a43e463623dab2d, type: 3}
 --- !u!1 &8564930726583423959
 GameObject:
   m_ObjectHideFlags: 0
